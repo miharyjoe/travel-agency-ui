@@ -10,13 +10,39 @@ import {
     Stack,
     Image,
   } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/NavBar';
 import { useDataProvider } from '../../config/ApiContext';
 
 
   export default function Login() {
-    
+    const { login , instance}= useDataProvider();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [roles, setRoles] = useState('');
+
+    const handleChange = event => {
+      setEmail(event.target.value);
+  
+      console.log('value is:', event.target.value);
+    };
+    const handleChangeP = event => {
+      setPassword(event.target.value);
+  
+      console.log('value is:', event.target.value);
+    };
+    const handleChangeR = event => {
+      setRoles(event.target.value);
+  
+      console.log('value is:', event.target.value);
+    };
+    const click = () =>  {
+
+    }
+    useEffect(() => {
+      login(email,password,roles);
+  }, []);
     return (
       <>
       <Navbar/>
@@ -26,11 +52,15 @@ import { useDataProvider } from '../../config/ApiContext';
             <Heading fontSize={'2xl'}>Sign in to your account</Heading>
             <FormControl id="email">
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input type="email" onChange={handleChange}/>
             </FormControl>
             <FormControl id="password">
               <FormLabel>Password</FormLabel>
-              <Input type="password" />
+              <Input type="password" onChange={handleChangeP}/>
+            </FormControl>
+            <FormControl id="roles">
+              <FormLabel>Roles</FormLabel>
+              <Input type="text" onChange={handleChangeR} />
             </FormControl>
             <Stack spacing={6}>
               <Stack
@@ -40,7 +70,7 @@ import { useDataProvider } from '../../config/ApiContext';
                 <Checkbox>Remember me</Checkbox>
                 <Link color={'blue.500'}>Forgot password?</Link>
               </Stack>
-              <Button colorScheme={'blue'} variant={'solid'}>
+              <Button colorScheme={'blue'} variant={'solid'} onClick={login}>
                 Sign in
               </Button>
             </Stack>

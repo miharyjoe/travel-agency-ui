@@ -121,7 +121,7 @@ import './css/nav.css';
               <PopoverTrigger>
                 <Link
                   p={2}
-                  href={navItem.href ?? '#'}
+                  href={navItem.href ?? '/travels'}
                   fontSize={'sm'}
                   fontWeight={500}
                   color={linkColor}

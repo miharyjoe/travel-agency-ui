@@ -1,66 +1,46 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const DataContext = createContext();
+const ContextValue = createContext();
 
-export const useDataProvider = () => useContext(DataContext);
+export const useDataProvider = () => useContext(ContextValue);
 
 export const DataProvider = ({ children }) => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [adminEmail, setAdminEmail] = useState('')
-  const [travels, setTravels] = useState([]);
-  const [notificationStatus, setNotificationStatus] = useState({type:'', message:'', isActive:false})
-  const [searchMotif, setSearchMotif] = useState();
-  const [searchTravels, setSearchTravels] = useState();
-  const instance = axios.create({
-    baseURL: 'http://localhost:8080'
-  })
-  const getTravels = async(pages, pageSize)=>{
-    const res = await instance.get(`/travels?page=${pages}&page_size=${pageSize}`)
-    setTravels(res.data)
+  const instance = axios.create({baseURL: 'http://localhost:8080'})
+
+  const getAllTravels = async () => {
+    const res = await instance.get('/travels?page=0&page_size=10')
+    return await res.data;
+}
+const getTravelById = async (id) => {
+    const res = await instance.get(`/travels/${id}`)
+    return await res.data
 }
 
-  const DisabelNotif = () => {
-    setNotificationStatus({type:'', message:'', isActive:false})
-  }
+const getAllReservations = async () => {
+  const res = await instance.get('/travels?page=0&page_size=10')
+  return await res.data;
+}
 
-  useEffect(()=>{
-    const timer = setTimeout(() => {
-      DisabelNotif()
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, [notificationStatus])
+const getReservationById = async (id) => {
+    const res = await instance.get('/reservations/${id}')
+    return await res.data;
+}
 
-  const goSearch = () =>{
-    let result = [];
-    travels.map((travel)=>{
-        if(travel.description.toLowerCase().includes(searchMotif.toLowerCase())){
-            result.push(travels)
-        }
-    })
-    setSearchTravels(result)
-  }
 
-  const restartSearch = () =>{
-    setSearchTravels()
-  }
+const login = async (username, password,roles) => {
+     await instance.post(`/login?username=${username}&password=${password}&roles=${roles}`)
+}
 
-  const contextValue = {
-    isAdmin,
-    setIsAdmin,
-    instance,
-    DisabelNotif,
-    notificationStatus,
-    setNotificationStatus,
-    travels,
-    adminEmail,
-    goSearch,
-    setSearchMotif,
-    searchTravels,
-    restartSearch
-  };
+const contextValue = {
+    getAllTravels,
+    getAllReservations,
+    getTravelById,
+    getReservationById,
+    login
+};
 
   return (
-      <DataContext.Provider value={contextValue}>{children}</DataContext.Provider>
+      <ContextValue.Provider value={contextValue}>{children}</ContextValue.Provider>
   );
 };

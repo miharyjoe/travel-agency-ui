@@ -21,7 +21,7 @@ import { useDataProvider } from '../../config/ApiContext';
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const {instance} = useDataProvider();
   return (
     <>
     <Navbar/>
