@@ -10,9 +10,16 @@ import {
     Stack,
     Image,
   } from '@chakra-ui/react';
-  
-  export default function SplitScreenLogin() {
+import Footer from '../../components/Footer';
+import Navbar from '../../components/NavBar';
+import { useDataProvider } from '../../config/ApiContext';
+
+
+  export default function Login() {
+    
     return (
+      <>
+      <Navbar/>
       <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
@@ -49,6 +56,8 @@ import {
           />
         </Flex>
       </Stack>
+      <Footer/>
+      </>
     );
   }
   

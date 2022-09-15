@@ -55,12 +55,15 @@ import './css/nav.css';
             />
           </Flex>
           <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
+            <Link href={'/'}>
             <Text
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
               fontFamily={'heading'}
               color={useColorModeValue('gray.800', 'white')}>
               My Travel.
             </Text>
+            </Link>
+
   
             <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
               <DesktopNav />
@@ -77,7 +80,7 @@ import './css/nav.css';
               fontSize={'sm'}
               fontWeight={400}
               variant={'link'}
-              href={'#'}>
+              href={'/login'}>
               Sign In
             </Button>
             <Button
@@ -90,7 +93,9 @@ import './css/nav.css';
               _hover={{
                 bg: 'purple.500',
               }}>
+                <Link  href='/signup'>
               Sign Up
+                </Link>
             </Button>
           </Stack>
           <ColorModeSwitcher/>

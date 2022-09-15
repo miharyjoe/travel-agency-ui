@@ -5,7 +5,6 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  HStack,
   InputRightElement,
   Stack,
   Button,
@@ -16,11 +15,16 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import Footer from '../../components/Footer';
+import Navbar from '../../components/NavBar';
+import { useDataProvider } from '../../config/ApiContext';
 
-export default function SignupCard() {
+export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
+    <>
+    <Navbar/>
     <Flex
       minH={'100vh'}
       align={'center'}
@@ -32,7 +36,7 @@ export default function SignupCard() {
             Sign up
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            to enjoy all of our cool features ✌️
+            Let's travel ✌️
           </Text>
         </Stack>
         <Box
@@ -74,12 +78,14 @@ export default function SignupCard() {
             </Stack>
             <Stack pt={6}>
               <Text align={'center'}>
-                Already a user? <Link color={'blue.400'}>Login</Link>
+                Already a user? <Link color={'blue.400'} href='/login'>Login</Link>
               </Text>
             </Stack>
           </Stack>
         </Box>
       </Stack>
     </Flex>
+    <Footer/>
+    </>
   );
 }

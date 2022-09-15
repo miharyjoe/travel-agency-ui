@@ -5,6 +5,7 @@ import {
     Text,
     VStack,
     useBreakpointValue,
+    Link,
   } from '@chakra-ui/react';
   
   export default function Hero() {
@@ -28,15 +29,18 @@ import {
               fontWeight={700}
               lineHeight={1.2}
               fontSize={useBreakpointValue({ base: '3xl', md: '4xl' })}>
-              See teh world with the best experiences and the cheapest
+              See the world with the best experiences
             </Text>
             <Stack direction={'row'}>
               <Button
                 bg={'blue.400'}
                 rounded={'full'}
                 color={'white'}
-                _hover={{ bg: 'blue.500' }}>
-                Show travels
+                _hover={{ bg: 'blue.500' }}
+                >
+                  <Link href='/travels'>                
+                  Show travels
+                  </Link>
               </Button>
               <Button
                 bg={'whiteAlpha.300'}
